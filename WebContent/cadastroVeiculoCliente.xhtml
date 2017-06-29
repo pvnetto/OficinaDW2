@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+	<ui:composition template="templateCliente.xhtml">
+   		<ui:define name="content">
+   			<h:form>
+					<h:messages/>
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel value="Placa:" for = "placa" />					
+							<p:inputText id = "placa" value = "#{veiculoBean.veiculo.placa}"></p:inputText>
+							<p:outputLabel value="Marca/Modelo:" for = "marcaModelo"/>
+							<h:selectOneMenu id = "marcaModelo" value = "#{veiculoBean.marcaModeloId}">
+								<f:selectItems value="#{veiculoBean.marcasModelos}" var = "mm" itemLabel = "#{mm.modelo}"
+								itemValue = "#{mm.id}"/>
+							</h:selectOneMenu>
+						<h:commandButton action="#{veiculoBean.inserirVeiculo(loginClienteStateful.clienteAtual.id)}" value="Cadastrar" />
+					
+					</h:panelGrid>
+					<p:messages autoUpdate="true" />
+			</h:form>
+   		</ui:define>
+   	</ui:composition>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+	<ui:composition template="templateCliente.xhtml">
+   		<ui:define name="content">
+   			<f:metadata>
+   				<f:viewAction action = "#{servicoBean.listarServicosPorIdCliente(loginClienteStateful.clienteAtual.id)}"/>
+   			</f:metadata>
+   		
+			<h:form id="f" style="width: 40%;  margin: 0 auto;" >
+				<p:panelGrid columns="2" rendered = "#{loginClienteStateful.loggedIn}">
+				
+				 	<f:facet name="header">Serviços:</f:facet>
+						<p:dataTable var="servico" value="#{servicoBean.listarServicosPorIdCliente(loginClienteStateful.clienteAtual.id)}">
+						
+							<p:column headerText="OS">
+					            <h:outputText value="#{servico.id}" />
+					        </p:column>
+						
+					        <p:column headerText="Oficina">
+					            <h:outputText value="#{servico.oficina.nome}" />
+					        </p:column>
+					
+					        <p:column headerText="Veículo">
+					            <h:outputText value="#{servico.veiculo.marcaModelo}" />
+					        </p:column>
+					        
+					        <p:column headerText="Status">
+					            <h:outputText value="#{servico.statusAtual.toString()}" />
+					        </p:column>
+				    	</p:dataTable>
+				    <f:facet name="footer">
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+   		</ui:define>
+   	</ui:composition>
+</html>

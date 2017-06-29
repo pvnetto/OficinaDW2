@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+	<ui:composition template="templateCliente.xhtml">
+   		<ui:define name="content">
+   			<h:form>
+					<h:messages/>
+					<h:panelGrid columns="2" cellpadding="5">
+					
+						<p:outputLabel value="Oficina:" for = "oficina" />					
+						<p:inputText id = "oficina" value = "#{servicoBean.oficinaId}"></p:inputText>
+						
+						<p:outputLabel value="Veículo:" for = "veiculoCliente"/>
+						<h:selectOneMenu id = "veiculoCliente" value = "#{servicoBean.veiculoId}">
+							<f:selectItems value="#{loginClienteStateful.listarVeiculosPorCliente()}" var = "v" itemLabel = "#{v}"
+							itemValue = "#{v.placa}"/>
+						</h:selectOneMenu>
+						
+						<p:outputLabel value="Descrição resumida do problema:" for = "descricao" />					
+						<p:inputText id = "descricao" value = "#{servicoBean.servico.descricao}"></p:inputText>
+						
+						<h:commandButton action="#{servicoBean.agendamentoCliente(loginClienteStateful.clienteAtual.id)}" value="Cadastrar" />
+					
+					</h:panelGrid>
+					<p:messages autoUpdate="true" />
+			</h:form>
+   		</ui:define>
+   	</ui:composition>
+</html>

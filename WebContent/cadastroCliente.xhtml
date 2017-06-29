@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	
+	<ui:composition template = "_template.xhtml">
+	<ui:define name="content">
+	
+		<h:form>
+			<h:messages id = "messages"/>
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="Nome:" for = "nome" />
+				<p:inputText id = "nome" value = "#{clienteBean.cliente.nome}" required = "true" requiredMessage = "Nome obrigatório">
+				</p:inputText>
+				
+				<p:outputLabel value="CPF:" for = "cpf"/>
+				<p:inputText id = "cpf" value = "#{clienteBean.cliente.id}" required = "true" requiredMessage = "CPF obrigatório"
+				validatorMessage = "CPF de tamanho inválido">
+					<f:validateLength maximum = "11"/>
+				</p:inputText>
+				
+				<p:outputLabel value="E-mail:" for = "email"/>
+				<p:inputText id = "email" value = "#{clienteBean.cliente.email}" required = "true" requiredMessage = "E-mail obrigatório">
+					<f:passThroughAttribute name="type" value="email"/>
+				</p:inputText>
+				
+				<p:outputLabel value="Senha:" for = "senha"/>
+				<h:inputSecret value="#{clienteBean.cliente.senha}" required="true" id="senha" requiredMessage = "Senha obrigatória"/>
+				
+				<p:outputLabel value="Telefone:" for = "telefone"/>
+				<p:inputText id = "telefone" value = "#{clienteBean.cliente.telefone}" required = "true" requiredMessage = "Telefone obrigatório">
+				</p:inputText>
+				
+				<p:outputLabel value = "Data de nascimento:" for = "dataDeNascimento"/>
+				<p:inputText id = "dataDeNascimento" value = "#{clienteBean.cliente.dataDeNascimento.time}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone = "America/Sao_Paulo"/>
+				</p:inputText>
+				
+				<p:outputLabel value="Sexo:" for = "sexo"/>
+				<h:selectOneMenu id = "sexo" value = "#{clienteBean.cliente.sexo}">
+					<f:selectItems value="#{clienteBean.sexos}" var = "sexo" itemLabel = "#{sexo}"
+					itemValue = "#{sexo}"/>
+				</h:selectOneMenu>
+				
+				<p:commandButton value="Cadastrar" action = "#{clienteBean.GravarCliente}" >
+					<f:ajax execute = "@form" render = "@form"/>
+				</p:commandButton>
+				
+			</h:panelGrid>
+			<p:messages autoUpdate="true" />
+		</h:form>
+		
+	</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	
+	<ui:composition template = "_template.xhtml">
+	<ui:define name="content">
+	
+	<h:form>
+		<h:messages/>
+	
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel value="CNPJ:" for = "cnpj"/>
+			<p:inputText id = "cnpj" value = "#{oficinaBean.oficina.cnpj}" required = "true" requiredMessage = "CNPJ obrigatório"></p:inputText>
+			
+			<p:outputLabel value="Nome:" for = "nome" />
+			<p:inputText id = "nome" value = "#{oficinaBean.oficina.nome}" required = "true" requiredMessage = "Nome obrigatório"></p:inputText>
+			
+			<p:outputLabel value="Telefone:" for = "telefone"/>
+			<p:inputText id = "telefone" value = "#{oficinaBean.oficina.telefone}" required = "true" requiredMessage = "Telefone obrigatório"></p:inputText>
+			
+			<p:outputLabel value="E-mail:" for = "email"/>
+			<p:inputText id = "email" value = "#{oficinaBean.oficina.email}" required = "true" requiredMessage = "E-mail obrigatório"></p:inputText>
+			
+			<p:outputLabel value="Senha:" for = "senha"/>
+			<h:inputSecret value="#{oficinaBean.oficina.senha}" required="true" id="senha" requiredMessage = "Senha obrigatória"/>
+			
+			<p:commandButton value="Cadastrar" action = "#{oficinaBean.GravarOficina}" ></p:commandButton>
+		</h:panelGrid>
+	</h:form>
+</ui:define>
+</ui:composition>
+</html>
